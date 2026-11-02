@@ -14,7 +14,7 @@ This exercise consists in extending the heat stencil application of Assignment 2
 - Illustrate the data in appropriate figures and discuss them. What can you observe?
 - Measure and illustrate one domain-specific and one domain-inspecific performance metric. What can you observe?
 - How can you verify the correctness of your applications?
-- Insert the wall times for the sequential version and for 96 cores for `N=768x768` and `T=768*100` into the comparison spreadsheet: https://docs.google.com/spreadsheets/d/1Xjs056g0HRjZwNLuCOxe6xtEH1Yk9u6t6UL-xPfPJKA
+- Insert the wall times for the sequential version and for 96 cores for `N=768x768` and `T=768*100` into the comparison spreadsheet: https://docs.google.com/spreadsheets/d/1Tj2Ic-kQIPCrq0ZIpKfPUeFV1pf2I1sT1qbMEEmIydw
 
 ## Exercise 2 (1.5 Points)
 
@@ -25,4 +25,4 @@ This exercise consists in comparing blocking and non-blocking communication for 
 - Provide an MPI implementation for the 1D and 2D heat stencil that uses non-blocking communication. If you already implemented a non-blocking version, provide a blocking version, but ensure the non-blocking version works as described below.
 - Structure your program such that you 1) start a non-blocking ghost cell exchange, 2) compute the inner cells which do not require the result of the ghost cell exchange, 3) block until the ghost cell exchange has finished, and 4) compute the remaining cells.
 - Run your programs with multiple problem and machine sizes and compare both versions.
-- Insert wall time for 96 cores for `N=768x768` and `T=768*100` into the comparison spreadsheet: https://docs.google.com/spreadsheets/d/1Xjs056g0HRjZwNLuCOxe6xtEH1Yk9u6t6UL-xPfPJKA
+- Insert wall time for 96 cores for `N=768x768` and `T=768*100` into the comparison spreadsheet: https://docs.google.com/spreadsheets/d/1Tj2Ic-kQIPCrq0ZIpKfPUeFV1pf2I1sT1qbMEEmIydw
