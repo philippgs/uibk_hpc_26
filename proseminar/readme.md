@@ -27,6 +27,7 @@ associated with a given date are to be discussed on that day.
 | 2026-10-21 | [2](02)    | Basic parallelization with MPI                              |
 | 2026-10-28 | [3](03)    | Functional debugging                                        |
 | 2026-11-04 | [4](04)    | 2D heat stencil & non-blocking communication                |
+| 2026-11-11 | [5](05)    | N-body                                                      |
 
 ## Handing in and Presenting Solutions
 
