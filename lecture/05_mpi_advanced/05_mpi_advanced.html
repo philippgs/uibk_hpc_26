@@ -397,11 +397,11 @@ Philipp Gschwandtner
 <section id="careful-with-displacements" class="slide level2">
 <h2>Careful with displacements</h2>
 <div class="columns">
-<div class="column" style="width:52%;">
+<div class="column" style="width:67%;">
 <ul>
 <li>careful with manually specifying displacements
 <ul>
-<li>binary layout of structs in memory is compiler-dependent (e.g.&nbsp;struct members might be padded)</li>
+<li>struct binary layout in memory is compiler-dependent (e.g.&nbsp;struct members might be padded)</li>
 <li>use <code>offsetof()</code> instead!</li>
 <li>careful with C vs.&nbsp;C++ differences, e.g.&nbsp;size of empty structs/classes</li>
 </ul></li>
@@ -411,7 +411,7 @@ Philipp Gschwandtner
 <li>rationale: <code>MPI_Aint</code> is a signed integer (overflow behavior is not defined), absolute addresses are unsigned (overflow behavior is defined)</li>
 </ul></li>
 </ul>
-</div><div class="column" style="width:48%;">
+</div><div class="column" style="width:33%;">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>MPI_Aint displacements<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span></span>
 <span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="dv">0</span><span class="op">,</span></span>
 <span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="dv">12</span> <span class="op">};</span></span>
@@ -444,7 +444,7 @@ Philipp Gschwandtner
 <span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
-<section id="struct-example" class="slide level2 smaller">
+<section id="struct-example" class="slide level2">
 <h2>Struct example</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -483,13 +483,13 @@ Philipp Gschwandtner
 <section id="non-contiguous-data" class="slide level2">
 <h2>Non-contiguous data</h2>
 <div class="columns">
-<div class="column" style="width:48%;">
+<div class="column" style="width:50%;">
 <ul>
 <li>send all max values of an array of <code>(min, max)</code>-tuples to another rank</li>
 <li>send the column of a matrix</li>
 <li>do all of that without having to copy data to a contiguous buffer first!</li>
 </ul>
-</div><div class="column" style="width:52%;">
+</div><div class="column" style="width:40%;">
 <p><img data-src="figs/out/s16_noncontig.svg" style="width:100.0%"></p>
 </div></div>
 </section>
@@ -508,7 +508,7 @@ Philipp Gschwandtner
 <p><img data-src="figs/out/s17_vector.svg" style="width:100.0%"></p>
 </div></div>
 </section>
-<section id="vector-example" class="slide level2 smaller">
+<section id="vector-example" class="slide level2">
 <h2>Vector example</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -535,7 +535,7 @@ Philipp Gschwandtner
 <span id="cb9-11"><a href="" aria-hidden="true" tabindex="-1"></a>MPI_Type_free<span class="op">(&amp;</span>myType<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
-<section id="vector-variants-use-case-compaction" class="slide level2 smaller">
+<section id="vector-variants-use-case-compaction" class="slide level2">
 <h2>Vector variants: use case compaction</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -550,8 +550,8 @@ Philipp Gschwandtner
 <span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>         MPI_STATUS_IGNORE<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 
-<img data-src="figs/out/s19_vector_variants.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:92.0%"></section>
-<section id="vector-variants-use-case-transposition" class="slide level2 smaller">
+<img data-src="figs/out/s19_vector_variants.svg" class="quarto-figure quarto-figure-left r-stretch" style="width:75.0%"></section>
+<section id="vector-variants-use-case-transposition" class="slide level2">
 <h2>Vector variants: use case transposition</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -578,13 +578,13 @@ Philipp Gschwandtner
 <div class="columns">
 <div class="column" style="width:42%;">
 <ul>
-<li>allows to address a contiguous multi-dimensional sub-range of array elements</li>
+<li>allow addressing a contiguous multi-dimensional sub-range of array elements</li>
 </ul>
 </div><div class="column" style="width:58%;">
 <p><img data-src="figs/out/s21_subarray.svg" style="width:100.0%"></p>
 </div></div>
 </section>
-<section id="subarray-example-in-2d" class="slide level2 smaller">
+<section id="subarray-example-in-2d" class="slide level2">
 <h2>Subarray example in 2D</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -613,7 +613,7 @@ Philipp Gschwandtner
 <span id="cb15-11"><a href="" aria-hidden="true" tabindex="-1"></a>MPI_Type_free<span class="op">(&amp;</span>myType<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
-<section id="subarray-receive-variants" class="slide level2 smaller">
+<section id="subarray-receive-variants" class="slide level2">
 <h2>Subarray receive variants</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -628,7 +628,7 @@ Philipp Gschwandtner
 </div></div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figs/out/s23_subarray_variants.svg" class="quarto-figure quarto-figure-center" height="230"></p>
+<p><img data-src="figs/out/s23_subarray_variants.svg" class="quarto-figure quarto-figure-center" height="350"></p>
 </figure>
 </div>
 </section>
@@ -653,7 +653,7 @@ Philipp Gschwandtner
 </ul></li>
 </ul>
 </section>
-<section id="contiguous-derived-datatypes" class="slide level2 smaller">
+<section id="contiguous-derived-datatypes" class="slide level2">
 <h2>Contiguous derived datatypes</h2>
 <div class="columns">
 <div class="column" style="width:48%;">
@@ -920,7 +920,7 @@ Philipp Gschwandtner
 <span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a>0:02.31</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
-<section id="daniels-weird-int-problem-contd" class="slide level2 smaller">
+<section id="daniels-weird-int-problem-contd" class="slide level2">
 <h2>Daniel’s weird <code>int</code> problem cont’d</h2>
 <p>profiled with <code>gprof</code> to find “hot spots”, left is <code>int</code>, right is <code>long long</code></p>
 <div class="columns">
@@ -956,7 +956,7 @@ Philipp Gschwandtner
 <span id="cb23-10"><a href="" aria-label="10"></a><span class="dv">92</span>   <span class="cf">else</span></span>
 <span id="cb23-11"><a href="" aria-label="11"></a><span class="dv">93</span>     B<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> tc <span class="op">+</span> <span class="fl">0.2</span> <span class="op">*</span> <span class="op">(</span>txl <span class="op">+</span> txr <span class="op">+</span> tzl <span class="op">+</span> tzr <span class="op">+</span> <span class="op">(-</span><span class="dv">4</span> <span class="op">*</span> tc<span class="op">));</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="daniels-weird-int-problem-contd-2" class="slide level2 smaller">
+<section id="daniels-weird-int-problem-contd-2" class="slide level2">
 <h2>Daniel’s weird <code>int</code> problem cont’d</h2>
 <p>far-fetched idea, but maybe branch (mis-)predictions? compared with <code>perf stat</code>:</p>
 <div class="columns">
@@ -984,7 +984,7 @@ Philipp Gschwandtner
 <span id="cb25-10"><a href="" aria-hidden="true" tabindex="-1"></a>  4.650327844 seconds time elapsed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
-<section id="daniels-weird-int-problem-contd-3" class="slide level2 smaller">
+<section id="daniels-weird-int-problem-contd-3" class="slide level2">
 <h2>Daniel’s weird <code>int</code> problem cont’d</h2>
 <p><code>value_t txl = ( i % Nx != 0 ) ? A[i-1] : tc;</code></p>
 <div class="columns">
@@ -1153,6 +1153,22 @@ Philipp Gschwandtner
 </div>
 <p>done!</p>
 </div></div>
+</section>
+<section id="verification-and-validation" class="slide level2">
+<h2>Verification and validation</h2>
+<ul>
+<li>absolutely not the same thing, though often used synonymously</li>
+<li><strong>verification</strong> means checking your implementation
+<ul>
+<li>ensure that implementation meets the specification</li>
+<li>check that software output is correct</li>
+</ul></li>
+<li><strong>validation</strong> means checking your specification
+<ul>
+<li>ensure that the specification meets requirements</li>
+<li>check that specification is correct</li>
+</ul></li>
+</ul>
 </section></section>
 <section>
 <section id="summary" class="title-slide slide level1 center">
@@ -1188,80 +1204,6 @@ Philipp Gschwandtner
 <li><strong>Tofu D interconnect:</strong> <a href="https://link.springer.com/content/pdf/10.1007/978-3-319-07518-1_35.pdf" class="uri">https://link.springer.com/content/pdf/10.1007/978-3-319-07518-1_35.pdf</a></li>
 </ul>
 </div>
-</section></section>
-<section>
-<section id="appendix" class="title-slide slide level1 center">
-<h1>Appendix</h1>
-
-</section>
-<section id="verification-and-validation" class="slide level2">
-<h2>Verification and validation</h2>
-<ul>
-<li>absolutely not the same thing, though often used synonymously</li>
-<li><strong>verification</strong> means checking your implementation
-<ul>
-<li>ensure that implementation meets the specification</li>
-<li>check that software output is correct</li>
-</ul></li>
-<li><strong>validation</strong> means checking your specification
-<ul>
-<li>ensure that the specification meets requirements</li>
-<li>check that specification is correct</li>
-</ul></li>
-</ul>
-</section>
-<section id="tales-from-the-proseminar-chatgpt" class="slide level2">
-<h2>Tales from the proseminar: ChatGPT</h2>
-<div class="columns">
-<div class="column" style="width:45%;">
-<ul>
-<li>ChatGPT and other LLMs are absolutely useful
-<ul>
-<li>if you know their limitations</li>
-</ul></li>
-<li>Consider them an <em>“unreliable research assistant”</em>
-<ul>
-<li>good for getting possibly new input/perspective/etc.</li>
-<li>but always require their work to be checked</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:55%;">
-<p><img data-src="img/image4.png" style="width:100.0%"></p>
-</div></div>
-</section>
-<section id="shifting-contd" class="slide level2">
-<h2>Shifting cont’d</h2>
-<div class="columns">
-<div class="column" style="width:52%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>MPI_Cart_shift<span class="op">(</span>comm<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span></span>
-<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>               <span class="op">&amp;</span>source<span class="op">,</span> <span class="op">&amp;</span>dest<span class="op">);</span></span>
-<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">// rank at 1,1:</span></span>
-<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">// source is 1,0</span></span>
-<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">// dest   is 1,2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column" style="width:48%;">
-<p><img data-src="figs/out/s34_cart_shift.svg" style="width:100.0%"></p>
-</div></div>
-</section>
-<section id="shifting-contd-1" class="slide level2">
-<h2>Shifting cont’d</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> MPI_Cart_shift<span class="op">(</span>MPI_Comm comm<span class="op">,</span> <span class="dt">int</span> direction<span class="op">,</span> <span class="dt">int</span> disp<span class="op">,</span></span>
-<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a>                   <span class="dt">int</span><span class="op">*</span> rank_source<span class="op">,</span> <span class="dt">int</span><span class="op">*</span> rank_dest<span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li><code>comm</code>: communicator (must have Cartesian topology!)</li>
-<li><code>direction</code>: dimension along which to select neighbors</li>
-<li><code>disp</code>: displacement/distance to neighbors</li>
-<li><code>rank_source</code>: neighbor for which the calling rank is the destination</li>
-<li><code>rank_dest</code>: requested neighbor for the calling rank</li>
-</ul>
-</section>
-<section id="slicing-contd" class="slide level2">
-<h2>Slicing cont’d</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> MPI_Cart_sub<span class="op">(</span>MPI_Comm comm<span class="op">,</span> <span class="dt">const</span> <span class="dt">int</span> remain_dims<span class="op">[],</span> MPI_Comm<span class="op">*</span> newcomm<span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li><code>comm</code>: current communicator (must have Cartesian topology!)</li>
-<li><code>remain_dims</code>: which dimensions to keep in sub-grid (0 = drop, 1 = include)</li>
-<li><code>newcomm</code>: new communicator holding only ranks of this slice</li>
-</ul>
 
 </section></section>
     </div>

@@ -141,16 +141,16 @@ struct Particle {
 ## Careful with displacements
 
 :::: {.columns}
-::: {.column width="52%"}
+::: {.column width="67%"}
 - careful with manually specifying displacements
-  - binary layout of structs in memory is compiler-dependent (e.g. struct members might be padded)
+  - struct binary layout in memory is compiler-dependent (e.g. struct members might be padded)
   - use `offsetof()` instead!
   - careful with C vs. C++ differences, e.g. size of empty structs/classes
 - do not confuse `MPI_Aint` (programming language data type) and `MPI_AINT` (MPI data type)
 - additional option: use `MPI_BOTTOM` as the buffer argument, enables use of absolute addresses as displacements instead of offsets
   - rationale: `MPI_Aint` is a signed integer (overflow behavior is not defined), absolute addresses are unsigned (overflow behavior is defined)
 :::
-::: {.column width="48%"}
+::: {.column width="33%"}
 ```c
 MPI_Aint displacements[2] =
   { 0,
@@ -184,7 +184,7 @@ struct Particle {
 :::
 ::::
 
-## Struct example {.smaller}
+## Struct example
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -229,12 +229,12 @@ MPI_Type_free(&myType);
 ## Non-contiguous data
 
 :::: {.columns}
-::: {.column width="48%"}
+::: {.column width="50%"}
 - send all max values of an array of `(min, max)`-tuples to another rank
 - send the column of a matrix
 - do all of that without having to copy data to a contiguous buffer first!
 :::
-::: {.column width="52%"}
+::: {.column width="40%"}
 ![](figs/out/s16_noncontig.svg){width="100%"}
 :::
 ::::
@@ -252,7 +252,7 @@ MPI_Type_free(&myType);
 :::
 ::::
 
-## Vector example {.smaller}
+## Vector example
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -285,7 +285,7 @@ MPI_Type_free(&myType);
 :::
 ::::
 
-## Vector variants: use case compaction {.smaller}
+## Vector variants: use case compaction
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -306,9 +306,9 @@ MPI_Recv(data, COUNT*LENGTH, MPI_CHAR,
 :::
 ::::
 
-![](figs/out/s19_vector_variants.svg){fig-align="center" width="92%"}
+![](figs/out/s19_vector_variants.svg){fig-align="left" width="75%"}
 
-## Vector variants: use case transposition {.smaller}
+## Vector variants: use case transposition
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -337,14 +337,14 @@ MPI_Recv(data, SIZE, MPI_INT,
 
 :::: {.columns}
 ::: {.column width="42%"}
-- allows to address a contiguous multi-dimensional sub-range of array elements
+- allow addressing a contiguous multi-dimensional sub-range of array elements
 :::
 ::: {.column width="58%"}
 ![](figs/out/s21_subarray.svg){width="100%"}
 :::
 ::::
 
-## Subarray example in 2D {.smaller}
+## Subarray example in 2D
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -379,7 +379,7 @@ MPI_Type_free(&myType);
 :::
 ::::
 
-## Subarray receive variants {.smaller}
+## Subarray receive variants
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -399,7 +399,7 @@ MPI_Recv(subData, SUBSIZE*SUBSIZE,
 :::
 ::::
 
-![](figs/out/s23_subarray_variants.svg){fig-align="center" height="230"}
+![](figs/out/s23_subarray_variants.svg){fig-align="center" height="350"}
 
 ## Multiple ways of distributing columns
 
@@ -414,7 +414,7 @@ MPI_Recv(subData, SUBSIZE*SUBSIZE,
 - same functional result for all of the above, but performance might differ
   - remember, MPI doesn't guarantee performance portability
 
-## Contiguous derived datatypes {.smaller}
+## Contiguous derived datatypes
 
 :::: {.columns}
 ::: {.column width="48%"}
@@ -620,7 +620,7 @@ $ /usr/bin/time -f %E ./stencil_int 100 100
 :::
 ::::
 
-## Daniel's weird `int` problem cont'd {.smaller}
+## Daniel's weird `int` problem cont'd
 
 profiled with `gprof` to find "hot spots", left is `int`, right is `long long`
 
@@ -665,7 +665,7 @@ time  seconds  seconds   name
 93     B[i] = tc + 0.2 * (txl + txr + tzl + tzr + (-4 * tc));
 ```
 
-## Daniel's weird `int` problem cont'd {.smaller}
+## Daniel's weird `int` problem cont'd
 
 far-fetched idea, but maybe branch (mis-)predictions? compared with `perf stat`:
 
@@ -700,7 +700,7 @@ far-fetched idea, but maybe branch (mis-)predictions? compared with `perf stat`:
 :::
 ::::
 
-## Daniel's weird `int` problem cont'd {.smaller}
+## Daniel's weird `int` problem cont'd
 
 `value_t txl = ( i % Nx != 0 ) ? A[i-1] : tc;`
 
@@ -804,6 +804,16 @@ done!
 :::
 ::::
 
+## Verification and validation
+
+- absolutely not the same thing, though often used synonymously
+- **verification** means checking your implementation
+  - ensure that implementation meets the specification
+  - check that software output is correct
+- **validation** means checking your specification
+  - ensure that the specification meets requirements
+  - check that specification is correct
+
 # Summary
 
 ## Summary
@@ -825,70 +835,3 @@ done!
 ::: {.small}
 - **Tofu D interconnect:** <https://link.springer.com/content/pdf/10.1007/978-3-319-07518-1_35.pdf>
 :::
-
-# Appendix
-
-## Verification and validation
-
-- absolutely not the same thing, though often used synonymously
-- **verification** means checking your implementation
-  - ensure that implementation meets the specification
-  - check that software output is correct
-- **validation** means checking your specification
-  - ensure that the specification meets requirements
-  - check that specification is correct
-
-## Tales from the proseminar: ChatGPT
-
-:::: {.columns}
-::: {.column width="45%"}
-- ChatGPT and other LLMs are absolutely useful
-  - if you know their limitations
-- Consider them an *"unreliable research assistant"*
-  - good for getting possibly new input/perspective/etc.
-  - but always require their work to be checked
-:::
-::: {.column width="55%"}
-![](img/image4.png){width="100%"}
-:::
-::::
-
-## Shifting cont'd
-
-:::: {.columns}
-::: {.column width="52%"}
-```c
-MPI_Cart_shift(comm, 0, 1,
-               &source, &dest);
-// rank at 1,1:
-// source is 1,0
-// dest   is 1,2
-```
-:::
-::: {.column width="48%"}
-![](figs/out/s34_cart_shift.svg){width="100%"}
-:::
-::::
-
-## Shifting cont'd
-
-```c
-int MPI_Cart_shift(MPI_Comm comm, int direction, int disp,
-                   int* rank_source, int* rank_dest)
-```
-
-- `comm`: communicator (must have Cartesian topology!)
-- `direction`: dimension along which to select neighbors
-- `disp`: displacement/distance to neighbors
-- `rank_source`: neighbor for which the calling rank is the destination
-- `rank_dest`: requested neighbor for the calling rank
-
-## Slicing cont'd
-
-```c
-int MPI_Cart_sub(MPI_Comm comm, const int remain_dims[], MPI_Comm* newcomm)
-```
-
-- `comm`: current communicator (must have Cartesian topology!)
-- `remain_dims`: which dimensions to keep in sub-grid (0 = drop, 1 = include)
-- `newcomm`: new communicator holding only ranks of this slice
