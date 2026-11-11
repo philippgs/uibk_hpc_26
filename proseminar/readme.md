@@ -28,6 +28,7 @@ associated with a given date are to be discussed on that day.
 | 2026-10-28 | [3](03)    | Functional debugging                                        |
 | 2026-11-04 | [4](04)    | 2D heat stencil & non-blocking communication                |
 | 2026-11-11 | [5](05)    | N-body                                                      |
+| 2026-11-18 | [6](06)    | N-body: Parallelization & load imbalance                    |
 
 ## Handing in and Presenting Solutions
 
