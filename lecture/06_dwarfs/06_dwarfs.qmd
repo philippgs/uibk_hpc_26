@@ -26,14 +26,12 @@ format:
 ::: {.column width="68%"}
 - group applications by similarity in computation and data structures
   - first published by Asanovic et al. in *The Landscape of Parallel Computing Research: A View from Berkeley*
-  - <https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-183.pdf>
 - purely algorithmic, implementation-independent
   - enables cross-platform reasoning and cross-application knowledge/resource sharing (e.g. libraries)
-- serve as small, abstract, high-level benchmarks for studying new
+- serve as small, abstract, high-level benchmarks for studying e.g. new
   - programming models
   - communication patterns
   - hardware architectures, topologies
-  - …
 - used to kick off innovation in all of these aspects
 :::
 ::: {.column width="32%"}
@@ -43,6 +41,10 @@ format:
 :::
 :::
 ::::
+
+::: {.aside}
+<https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-183.pdf>
+:::
 
 ## 7 original dwarfs of HPC
 
@@ -83,7 +85,7 @@ What have you already heard?
 :::
 ::::
 
-## Dense linear algebra: characteristics {.smaller}
+## Dense linear algebra: characteristics
 
 :::: {.columns}
 ::: {.column width="52%"}
@@ -132,12 +134,12 @@ vmulpd     ymm0, ymm0, YMMWORD PTR [rdx+rdi]
 ![](img/image5.png){.fig-card width="100%"}
 
 ::: {.aside}
-Taken from the June 2024 list of the Top500
+Taken from the June 2026 list of the Top500
 :::
 :::
 ::::
 
-## Dense linear algebra: optimizations {.smaller}
+## Dense linear algebra: optimizations
 
 :::: {.columns}
 ::: {.column width="52%"}
@@ -182,7 +184,7 @@ for (int ii = 0; ii < N; ii += ib) {
 :::
 ::::
 
-## Sparse linear algebra: characteristics {.smaller}
+## Sparse linear algebra: characteristics
 
 :::: {.columns}
 ::: {.column width="46%"}
@@ -215,7 +217,7 @@ sparseMatrix.i[0] = 0;
 :::
 ::::
 
-## Sparse linear algebra: optimizations {.smaller}
+## Sparse linear algebra: optimizations
 
 :::: {.columns}
 ::: {.column width="46%"}
@@ -286,7 +288,7 @@ sparseMatrix.i[0] = 0;
 - e.g. galaxy collision simulations, molecular dynamics, protein folding
 :::
 ::: {.column width="48%"}
-![](img/image13.png){.fig-card width="100%"}
+![](img/image13.png){.fig-card width="70%"}
 :::
 ::::
 
@@ -465,7 +467,7 @@ sparseMatrix.i[0] = 0;
 10. Dynamic Programming
 11. Backtrack & Branch+Bound
 12. Graphical Models
-13. Finite State Machine
+13. Finite State Machines
 :::
 ::: {.column width="55%"}
 - slightly different focus compared to first 7 dwarfs
@@ -474,7 +476,7 @@ sparseMatrix.i[0] = 0;
 :::
 ::::
 
-## Combinational logic {.smaller}
+## Combinational logic
 
 :::: {.columns}
 ::: {.column width="46%"}
@@ -551,7 +553,7 @@ uint8_t compute(uint8_t const msg[], int n) {
 :::
 ::::
 
-## Probabilistic graphical models {.smaller}
+## Probabilistic graphical models
 
 :::: {.columns}
 ::: {.column width="46%"}
@@ -595,7 +597,7 @@ uint8_t compute(uint8_t const msg[], int n) {
   - ongoing research
 :::
 ::: {.column width="58%"}
-![](figs/out/s35_fsm.svg){width="100%"}
+![](figs/out/s35_fsm.svg){width="80%"}
 :::
 ::::
 
@@ -631,134 +633,4 @@ uint8_t compute(uint8_t const msg[], int n) {
 
 ::: {.small}
 - **Dwarfs:** <http://pngimg.com/download/47261>, <http://rpgmke.wikidot.com/moonshae-isles-campaign>
-:::
-
-# Appendix
-
-## TOP500 November '23 update highlights
-
-:::: {.columns}
-::: {.column width="46%"}
-- quite some changes in the top spots
-  - Frontier still No. 1 & still the only Exascale system
-  - new! Aurora No. 2 (but only partial availability)
-    - full system expected to exceed 2 Exaflops
-    - uses Intel CPUs and Intel GPUs
-  - Fugaku moved to No. 4 (previously 2)
-  - European systems moved down
-    - LUMI 5 (prev. 3)
-    - LEONARDO 6 (prev. 4)
-- related but not online yet: JUPITER (Jülich, Germany)
-  - expected to be EU's first Exaflop system
-  - new Nvidia Grace Hopper chips (combined CPU+GPU with hardware-supported memory coherency!)
-:::
-::: {.column width="54%"}
-![](img/image20.png){.fig-card width="100%"}
-:::
-::::
-
-## Daniel's weird `int` problem
-
-:::: {.columns}
-::: {.column width="52%"}
-- sequential 2D heat stencil
-  - 100x100 problem size
-  - `-O0` (but also with `-O2`) on LCC2
-  - gcc 4.8.5 (but also 9.2 and MSVC 2019)
-  - switching from `long long` loop iterators to `int` halves execution time
-- What the heck is going on?
-:::
-::: {.column width="48%"}
-```default
-$ /usr/bin/time -f %E ./stencil_long 100 100
-0:04.60
-
-$ /usr/bin/time -f %E ./stencil_int 100 100
-0:02.31
-```
-:::
-::::
-
-## Daniel's weird `int` problem cont'd {.smaller}
-
-profiled with `gprof` to find "hot spots", left is `int`, right is `long long`
-
-:::: {.columns}
-::: {.column width="50%"}
-```default
-%   cumulative   self
-time  seconds  seconds   name
-32.92    0.76     0.76   int.c:93
-20.06    1.22     0.46   int.c:78
-14.83    1.56     0.34   int.c:79
-10.47    1.80     0.24   int.c:87
- 9.59    2.02     0.22   int.c:86
-```
-:::
-::: {.column width="50%"}
-```default
-%   cumulative   self
-time  seconds  seconds   name
-36.84    1.69     1.69   long.c:79
-31.61    3.15     1.45   long.c:78
-16.35    3.90     0.75   long.c:93
- 5.34    4.15     0.25   long.c:86
- 3.27    4.30     0.15   long.c:87
-```
-:::
-::::
-
-## Daniel's weird `int` problem cont'd
-
-```{.c code-line-numbers="|5-6"}
-74   // get temperature at current position
-75   value_t tc = A[i];
-76
-77   // get temperatures of adjacent cells
-78   value_t txl = (i % Nx != 0)      ? A[i - 1] : tc;
-79   value_t txr = (i % Nx != Nx - 1) ? A[i + 1] : tc;
-     // ...... snip ......
-90   if (Ny > 1)
-91     B[i] = tc + 0.165 * (txl + txr + tyl + tyr + tzl + tzr + (-6 * tc));
-92   else
-93     B[i] = tc + 0.2 * (txl + txr + tzl + tzr + (-4 * tc));
-```
-
-## Daniel's weird `int` problem cont'd {.smaller}
-
-far-fetched idea, but maybe branch (mis-)predictions? compared with `perf stat`:
-
-:::: {.columns}
-::: {.column width="50%"}
-```default
-  2328.650634 task-clock:u (msec) #  0.996 CPUs
-            0 context-switches:u  #  0.000 K/sec
-            0 cpu-migrations:u    #  0.000 K/sec
-          186 page-faults:u       #  0.080 K/sec
-5,739,935,525 cycles:u            #  2.465 GHz
-10,671,532,880 instructions:u     #  1.86  IPC
-1,196,623,336 branches:u          # 513.870 M/sec
-    1,030,678 branch-misses:u     #  0.09%
-
-  2.338387625 seconds time elapsed
-```
-:::
-::: {.column width="50%"}
-```default
-  4639.728721 task-clock:u (msec) #  0.998 CPUs
-            0 context-switches:u  #  0.000 K/sec
-            0 cpu-migrations:u    #  0.000 K/sec
-          186 page-faults:u       #  0.040 K/sec
-11,444,184,736 cycles:u           #  2.467 GHz
-10,972,976,005 instructions:u     #  0.96  IPC
-1,196,977,569 branches:u          # 257.984 M/sec
-    1,030,347 branch-misses:u     #  0.09%
-
-  4.650327844 seconds time elapsed
-```
-:::
-::::
-
-::: {.aside}
-The same investigation appears in lecture 05; it is repeated here because the dwarfs lecture arrives at it from the structured-grid side.
 :::

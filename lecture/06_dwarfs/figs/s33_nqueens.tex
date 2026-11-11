@@ -31,9 +31,9 @@
 
   % one solution: file a..h -> rank
   \foreach \c/\r in {1/4, 2/2, 3/7, 4/3, 5/6, 6/8, 7/5, 8/1}{
-    \pgfmathparse{Mod(\c+\r,2) ? "inkdark" : "fg"}
-    \edef\qc{\pgfmathresult}
-    \queen{({\c*\cs+0.5*\cs},{\r*\cs+0.5*\cs})}{\qc}}
+    %\pgfmathparse{Mod(\c+\r,2) ? "inkdark" : "fg"}
+    %\edef\qc{\pgfmathresult}
+    \queen{({\c*\cs+0.5*\cs},{\r*\cs+0.5*\cs})}{fg}}
 
   \foreach \c/\l in {1/a, 2/b, 3/c, 4/d, 5/e, 6/f, 7/g, 8/h}{
     \node[text=blu,font=\sffamily\scriptsize] at ({\c*\cs+0.5*\cs},{0.5*\cs+0.20}) {\l};}

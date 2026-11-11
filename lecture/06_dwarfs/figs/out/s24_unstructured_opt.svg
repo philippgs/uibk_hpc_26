@@ -53,11 +53,6 @@
 </g>
 <g stroke='#7fb0e0'>
 <g stroke-width='0.9'>
-<path d='M62.59595-2.84544L86.78094 7.11317' fill='none'/>
-</g>
-</g>
-<g stroke='#7fb0e0'>
-<g stroke-width='0.9'>
 <path d='M86.78094 7.11317L110.96552-1.42271' fill='none'/>
 </g>
 </g>
@@ -444,12 +439,12 @@
 <g stroke-width='0.4'>
 <pattern id='pgfupat8' xlink:href='#pgfpat3'> <g fill='#10243a' stroke='#10243a'> <use xlink:href='#pgfsym3'/> </g> </pattern>
 <g fill='url(#pgfupat8)'>
-<path d='M93.04053 7.11317C93.04053 10.57028 90.23805 13.37276 86.78094 13.37276C83.32384 13.37276 80.52136 10.57028 80.52136 7.11317C80.52136 3.65607 83.32384 .85359 86.78094 .85359C90.23805 .85359 93.04053 3.65607 93.04053 7.11317ZM86.78094 7.11317'/>
+<path d='M61.74234-27.03001C61.74234-23.5729 58.93987-20.77043 55.48276-20.77043S49.22318-23.5729 49.22318-27.03001S52.02565-33.2896 55.48276-33.2896S61.74234-30.48712 61.74234-27.03001ZM55.48276-27.03001'/>
 </g>
 </g>
 </g>
 </g>
-<g transform='translate(86.78094,7.11317)'>
+<g transform='translate(55.48276,-27.03001)'>
 <g stroke='none' transform='scale(-1.00375,1.00375)translate(-62.775015,-29.977535)scale(-1,-1)'>
 <g fill='#000'>
 <g stroke='none'/>
@@ -470,32 +465,6 @@
 <g stroke-width='0.4'>
 <pattern id='pgfupat10' xlink:href='#pgfpat3'> <g fill='#10243a' stroke='#10243a'> <use xlink:href='#pgfsym3'/> </g> </pattern>
 <g fill='url(#pgfupat10)'>
-<path d='M61.74234-27.03001C61.74234-23.5729 58.93987-20.77043 55.48276-20.77043S49.22318-23.5729 49.22318-27.03001S52.02565-33.2896 55.48276-33.2896S61.74234-30.48712 61.74234-27.03001ZM55.48276-27.03001'/>
-</g>
-</g>
-</g>
-</g>
-<g transform='translate(55.48276,-27.03001)'>
-<g stroke='none' transform='scale(-1.00375,1.00375)translate(-62.775015,-29.977535)scale(-1,-1)'>
-<g fill='#000'>
-<g stroke='none'/>
-</g>
-</g>
-</g>
-</g>
-</g>
-</g>
-</g>
-<g fill='#f39200'>
-<g stroke='#10243a'>
-<g stroke-width='0.4'>
-<pattern id='pgfupat11' xlink:href='#pgfpat3'> <g fill='#10243a' stroke='#10243a'> <use xlink:href='#pgfsym3'/> </g> </pattern>
-<g fill='url(#pgfupat11)'>
-<g fill='#f39200'>
-<g stroke='#10243a'>
-<g stroke-width='0.4'>
-<pattern id='pgfupat12' xlink:href='#pgfpat3'> <g fill='#10243a' stroke='#10243a'> <use xlink:href='#pgfsym3'/> </g> </pattern>
-<g fill='url(#pgfupat12)'>
 <path d='M87.35007-31.29819C87.35007-27.84108 84.54759-25.0386 81.09048-25.0386C77.63338-25.0386 74.8309-27.84108 74.8309-31.29819S77.63338-37.55777 81.09048-37.55777C84.54759-37.55777 87.35007-34.7553 87.35007-31.29819ZM81.09048-31.29819'/>
 </g>
 </g>

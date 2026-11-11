@@ -7,12 +7,17 @@
 \begin{document}
 \begin{tikzpicture}[x=1cm,y=1cm]
 
-  \meshbase{i/mvhi, c/mvghost, d/mvghost, h/mvghost, j/mvghost,
+  \meshbase{i/mvhi, c/mvghost, d/mvghost, h/mvghost,
             m/mvghost, n/mvghost}
 
   % everything this rank has to touch for one update
   \draw[draw=fg,line width=0.9pt,dash pattern=on 4pt off 3pt]
     (2.20,-0.10) circle (1.35);
+
+  % TEMPORARY: vertex names from _mesh.tex, to identify edges -- remove again
+  %\foreach \n/\x/\y in \meshverts{
+  %  \node[font=\footnotesize\bfseries,text=red,fill=white,inner sep=0.8pt,
+  %        anchor=south west] at (\x+0.14,\y+0.14) {\n};}
 
 \end{tikzpicture}
 \end{document}
