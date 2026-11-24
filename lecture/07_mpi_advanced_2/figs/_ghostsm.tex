@@ -1,25 +1,37 @@
 % Shared building block for slides 34 and 35: eight sub-domains, each a grid
 % with a ring of ghost cells, arranged 4x2 with a shared-memory node boundary
 % drawn around them. The two slides differ only in what happens *inside* that
-% boundary -- a copy, or direct access -- so the layout is written once.
+% boundary -- a copy, or direct access -- so the layout is written once. With
+% direct access a rank reads its neighbour's cells in place, so the ghost cells
+% facing another sub-domain of the node disappear; only those facing outward,
+% which are still filled across the network, remain.
 
 \newcommand{\gsc}{0.155}   % cell size of a sub-domain
 
-% \subdomain{(x,y)} -- a 5x5 interior with an orange ghost ring around it
-\newcommand{\subdomain}[1]{%
+% \subdomain{(x,y)}{L}{R}{T}{B} -- a 5x5 interior with an orange ghost ring
+% around it. L/R/T/B (1/0) say whether the ghost cells on that side are drawn;
+% a corner cell is drawn only if both of its sides are.
+\newcommand{\subdomain}[5]{%
   \begin{scope}[shift={#1}]
     \foreach \c in {0,...,6}{\foreach \r in {0,...,6}{%
+      \ifthenelse{\(\c=0 \AND #2=0\) \OR \(\c=6 \AND #3=0\) \OR
+                  \(\r=0 \AND #4=0\) \OR \(\r=6 \AND #5=0\)}{}{%
       \ifthenelse{\c=0 \OR \c=6 \OR \r=0 \OR \r=6}
         {\draw[draw=uibkorange!70!black,line width=0.35pt,fill=uibkorange]
            ({\c*\gsc},{-\r*\gsc}) rectangle ++(\gsc,-\gsc);}
         {\draw[draw=blu,line width=0.35pt]
-           ({\c*\gsc},{-\r*\gsc}) rectangle ++(\gsc,-\gsc);}}}%
+           ({\c*\gsc},{-\r*\gsc}) rectangle ++(\gsc,-\gsc);}}}}%
   \end{scope}}
 
-% \ghostgrid{inner arrow style} -- the 4x2 arrangement plus the node boundary
-\newcommand{\ghostgrid}[1]{%
+% \ghostgrid{inner arrow style}{inner ghost cells? 1/0} -- the 4x2
+% arrangement plus the node boundary
+\newcommand{\ghostgrid}[2]{%
   \foreach \k in {0,...,3}{\foreach \m in {0,1}{%
-    \subdomain{({\k*1.75},{-\m*1.75})}}}
+    \pgfmathtruncatemacro{\gl}{#2==1 || \k==0}%
+    \pgfmathtruncatemacro{\gr}{#2==1 || \k==3}%
+    \pgfmathtruncatemacro{\gt}{#2==1 || \m==0}%
+    \pgfmathtruncatemacro{\gb}{#2==1 || \m==1}%
+    \subdomain{({\k*1.75},{-\m*1.75})}{\gl}{\gr}{\gt}{\gb}}}
   % exchanges inside the shared-memory node
   \foreach \k in {0,1,2}{\foreach \m in {0,1}{%
     \draw[<->,#1] ({\k*1.75+1.12},{-\m*1.75-0.54})

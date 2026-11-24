@@ -1,14 +1,15 @@
 % MPI shared memory access: inside the node there is no copy at all -- a rank
 % simply reads its neighbour's cells through a pointer into the shared window.
-% Only the exchanges that leave the node still cost a transfer.
+% Only the exchanges that leave the node still cost a transfer, so only the
+% ghost cells facing outward are still needed.
 \documentclass[dvisvgm,border=3pt]{standalone}
 \input{preamble.tex}
 \input{_ghostsm.tex}
 \begin{document}
 \begin{tikzpicture}[x=1cm,y=1cm]
-  \ghostgrid{draw=uibkorange,line width=1.4pt}
+  \ghostgrid{draw=blu!60,line width=1.4pt}{0}
   \node[text=fg,font=\sffamily\scriptsize,align=center,anchor=east]
-    at (-0.90,-1.42) {direct\\access};
+    at (-0.90,-1.42) {direct access};
   \node[text=fg,font=\sffamily\scriptsize,align=center,anchor=west]
     at (7.20,-1.42) {data transfer across\\network to next node};
   \node[text=fg,font=\sffamily\scriptsize,align=center,anchor=north]

@@ -34,7 +34,8 @@
   % the epoch during which the target's window is open
   \ifthenelse{\equal{#5}{1}}
     {\draw[rmaepoch] ({\rmaw-0.13},-0.95) rectangle ({\rmaw+0.13},-3.95);}{}
-  \draw[decorate,decoration={brace,amplitude=4pt,mirror},draw=blu,line width=0.7pt]
+  % drawn top to bottom, so the unmirrored brace points right, at its label
+  \draw[decorate,decoration={brace,amplitude=4pt},draw=blu,line width=0.7pt]
     ({\rmaw+0.30},-0.95) -- ({\rmaw+0.30},-3.95);
   \node[rmacall,anchor=west] at ({\rmaw+0.52},-2.45) {RMA epoch};
 

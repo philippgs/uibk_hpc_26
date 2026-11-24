@@ -282,7 +282,7 @@ Philipp Gschwandtner
 <p><img data-src="figs/out/s05_numa.svg" style="width:100.0%"></p>
 </div></div>
 </section>
-<section id="communicators-and-groups" class="slide level2">
+<section id="communicators-and-groups" class="slide level2 smaller">
 <h2>Communicators and groups</h2>
 <ul>
 <li>communicators and groups hold sets of ranks
@@ -368,6 +368,8 @@ Philipp Gschwandtner
 </section>
 <section id="operations-on-mpi_comm" class="slide level2">
 <h2>Operations on <code>MPI_Comm</code></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li><strong>constructors</strong>
 <ul>
@@ -376,6 +378,9 @@ Philipp Gschwandtner
 <li><code>MPI_Comm_split(…)</code></li>
 <li>convenience constructors such as <code>MPI_Cart_sub(…)</code></li>
 </ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
 <li><strong>accessors</strong>
 <ul>
 <li><code>MPI_Comm_size(…)</code></li>
@@ -390,6 +395,7 @@ Philipp Gschwandtner
 <li><code>MPI_Comm_free(…)</code></li>
 </ul></li>
 </ul>
+</div></div>
 </section>
 <section id="group-and-communicator-workflow" class="slide level2">
 <h2>Group and communicator workflow</h2>
@@ -441,7 +447,7 @@ Philipp Gschwandtner
 <p><img data-src="figs/out/s12_split.svg" style="width:100.0%"></p>
 </div></div>
 </section>
-<section id="solutions-to-motivation-examples" class="slide level2 smaller">
+<section id="solutions-to-motivation-examples" class="slide level2">
 <h2>Solutions to motivation examples</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -498,7 +504,7 @@ Philipp Gschwandtner
 <h1>One-sided Communication</h1>
 
 </section>
-<section id="motivation-1" class="slide level2">
+<section id="motivation-1" class="slide level2 smaller">
 <h2>Motivation</h2>
 <ul>
 <li><strong>message-passing paradigm</strong>
@@ -571,7 +577,7 @@ Philipp Gschwandtner
 </figure>
 </div>
 </section>
-<section id="means-of-synchronization" class="slide level2">
+<section id="means-of-synchronization" class="slide level2 smaller">
 <h2>Means of synchronization</h2>
 <ul>
 <li><strong>active target synchronization</strong>
@@ -793,7 +799,7 @@ Philipp Gschwandtner
 </ul></li>
 </ul>
 </section>
-<section id="mpi-one-sided-communication-example" class="slide level2 smaller">
+<section id="mpi-one-sided-communication-example" class="slide level2">
 <h2>MPI one-sided communication example</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -914,7 +920,7 @@ Philipp Gschwandtner
 <span id="cb8-12"><a href="" aria-hidden="true" tabindex="-1"></a>MPI_Win_fence<span class="op">(</span><span class="dv">0</span><span class="op">,</span> win<span class="op">);</span></span>
 <span id="cb8-13"><a href="" aria-hidden="true" tabindex="-1"></a>MPI_Win_free<span class="op">(&amp;</span>win<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="mpi-and-multithreading" class="slide level2">
+<section id="mpi-and-multithreading" class="slide level2 smaller">
 <h2>MPI and multithreading</h2>
 <ul>
 <li>one-sided shared memory communication can become quite complex
