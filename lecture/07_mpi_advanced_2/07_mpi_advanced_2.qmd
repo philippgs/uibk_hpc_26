@@ -56,7 +56,7 @@ format:
 :::
 ::::
 
-## Communicators and groups
+## Communicators and groups { .smaller }
 
 - communicators and groups hold sets of ranks
   - directly used for e.g. collective communication
@@ -112,11 +112,15 @@ format:
 
 ## Operations on `MPI_Comm`
 
+:::: {.columns}
+::: {.column width="50%"}
 - **constructors**
   - `MPI_Comm_dup(…)`
   - `MPI_Comm_create(…)`
   - `MPI_Comm_split(…)`
   - convenience constructors such as `MPI_Cart_sub(…)`
+:::
+::: {.column width="50%"}
 - **accessors**
   - `MPI_Comm_size(…)`
   - `MPI_Comm_rank(…)`
@@ -124,6 +128,8 @@ format:
     - result is `MPI_IDENT`, `MPI_SIMILAR`, `MPI_CONGRUENT` or `MPI_UNEQUAL`
 - **destructor**
   - `MPI_Comm_free(…)`
+:::
+::::
 
 ## Group and communicator workflow
 
@@ -172,7 +178,7 @@ MPI_Comm_rank(newComm, &newRank);
 :::
 ::::
 
-## Solutions to motivation examples {.smaller}
+## Solutions to motivation examples
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -225,7 +231,7 @@ MPI_Comm_split_type(MPI_COMM_WORLD,
 
 # One-sided Communication
 
-## Motivation
+## Motivation { .smaller }
 
 - **message-passing paradigm**
   - fits distributed memory systems well
@@ -268,7 +274,7 @@ MPI_Comm_split_type(MPI_COMM_WORLD,
 
 ![](figs/out/s19_two_vs_one_sided.svg){fig-align="center" height="440"}
 
-## Means of synchronization
+## Means of synchronization { .smaller }
 
 - **active target synchronization**
   - target participates in synchronization
@@ -427,7 +433,7 @@ int MPI_Put(const void* origin_addr, int origin_count,
     - must be single-element
     - must be predefined data type
 
-## MPI one-sided communication example {.smaller}
+## MPI one-sided communication example
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -530,7 +536,7 @@ MPI_Win_fence(0, win);
 MPI_Win_free(&win);
 ```
 
-## MPI and multithreading
+## MPI and multithreading { .smaller }
 
 - one-sided shared memory communication can become quite complex
   - there are alternatives: MPI+(OpenMP or `std::thread` or Pthreads or TBB or …)
