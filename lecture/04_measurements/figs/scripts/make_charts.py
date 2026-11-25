@@ -19,7 +19,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from figtheme import themes  # shared/figs, put on PYTHONPATH by build_figs.py
+from figtheme import save_aligned, themes  # shared/figs, put on PYTHONPATH by build_figs.py
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.normpath(os.path.join(HERE, "..", "out"))
@@ -54,22 +54,20 @@ def chart(t, path, fn, ylabel, ylim):
     ax.set_axisbelow(True)
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.18), ncol=5,
               handlelength=1.6, columnspacing=1.2)
-    fig.tight_layout()
-    fig.savefig(path, format="svg", transparent=True, bbox_inches="tight")
-    plt.close(fig)
-    print("wrote", os.path.join(os.path.basename(os.path.dirname(path)),
-                                os.path.basename(path)))
+    return fig, path
 
 
 def main():
     for t in themes(OUT):
         t.apply()
-        chart(t, t.out("s11_amdahl_speedup.svg"),
-              amdahl, "ideal speedup", (0, 5))
-        chart(t, t.out("s12_amdahl_efficiency.svg"),
-              lambda a, n: amdahl(a, n) / n, "efficiency", (0, 1.2))
-        chart(t, t.out("s15_gustafson.svg"),
-              gustafson, "ideal speedup", (0, 8))
+        # same chart three times over: keep the axes in place between them
+        save_aligned([
+            chart(t, t.out("s11_amdahl_speedup.svg"),
+                  amdahl, "ideal speedup", (0, 5)),
+            chart(t, t.out("s12_amdahl_efficiency.svg"),
+                  lambda a, n: amdahl(a, n) / n, "efficiency", (0, 1.2)),
+            chart(t, t.out("s15_gustafson.svg"),
+                  gustafson, "ideal speedup", (0, 8))])
 
 
 if __name__ == "__main__":

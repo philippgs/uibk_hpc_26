@@ -43,3 +43,10 @@
   \foreach \c/\r/\s in {#1}{%
     \node[cdot\s] (t\c-\r) at ({\c*\cartd},{-\r*\cartd}) {};}%
 }
+
+% \cartopsframe -- common frame (see \figframe in shared/figs/preamble.tex),
+% so the figures that end with it come out the same size and line up when
+% the slides change: slides 34 and 35 (shift, sub) show the same grid in turn.
+% Re-derive it with  python tools/build_figs.py --measure <figures>
+% if one of them grows.
+\newcommand{\cartopsframe}{\figframe{-0.66}{-2.79}{3.00}{0.45}}

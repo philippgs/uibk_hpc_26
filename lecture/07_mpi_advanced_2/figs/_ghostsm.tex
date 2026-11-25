@@ -50,3 +50,10 @@
   % the node boundary
   \draw[draw=blu,line width=0.8pt,dash pattern=on 3pt off 3pt]
     (-0.22,0.22) rectangle (6.52,-3.06);}
+
+% \ghostframe -- common frame (see \figframe in shared/figs/preamble.tex),
+% so the figures that end with it come out the same size and line up when
+% the slides change: slides 34 and 35 show the same layout in turn.
+% Re-derive it with  python tools/build_figs.py --measure <figures>
+% if one of them grows.
+\newcommand{\ghostframe}{\figframe{-2.72}{-4.19}{9.62}{0.83}}

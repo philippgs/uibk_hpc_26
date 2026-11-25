@@ -57,6 +57,19 @@
   \colorlet{accent}{uibkorange}
 \fi
 
+% --- Fixed frames for figure variants --------------------------------------
+% A figure is normally cropped to whatever it draws, so two variants of the
+% same picture (shown on consecutive slides) come out at slightly different
+% sizes and jump when the slide changes. \figframe{xmin}{ymin}{xmax}{ymax},
+% placed at the very end of the tikzpicture, replaces the figure's bounding box
+% by that rectangle (picture coordinates). Give every variant the same frame --
+% usually a macro in the deck's shared _*.tex -- and they line up exactly.
+% build_figs.py notices \figframe and keeps the frame in the SVG; its --measure
+% option prints each figure's extent, which is what to base a frame on.
+\newcommand{\figframe}[4]{%
+  \pgfresetboundingbox
+  \path[use as bounding box] (#1,#2) rectangle (#3,#4);}
+
 % --- Geometry of a buffer cell ---------------------------------------------
 \newcommand{\cellw}{0.46}
 \newcommand{\cellh}{0.52}
@@ -213,3 +226,19 @@
     }%
   \end{scope}%
 }
+
+% ---------------------------------------------------------------------------
+% build_figs.py --measure defines \figmeasure: every picture then reports its
+% bounding box in cm to the log. (Down here, after `every picture/.style` has
+% been set above, so that does not overwrite the hook.)
+% ---------------------------------------------------------------------------
+\ifdefined\figmeasure
+  \tikzset{every picture/.append style={execute at end picture={%
+    \pgfpointanchor{current bounding box}{south west}\pgfgetlastxy\fmxa\fmya
+    \pgfpointanchor{current bounding box}{north east}\pgfgetlastxy\fmxb\fmyb
+    \pgfmathparse{\fmxa/28.45274}\let\fmxa\pgfmathresult
+    \pgfmathparse{\fmya/28.45274}\let\fmya\pgfmathresult
+    \pgfmathparse{\fmxb/28.45274}\let\fmxb\pgfmathresult
+    \pgfmathparse{\fmyb/28.45274}\let\fmyb\pgfmathresult
+    \typeout{FIGBBOX \fmxa\space\fmya\space\fmxb\space\fmyb}}}}
+\fi

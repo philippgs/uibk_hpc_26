@@ -20,7 +20,7 @@ format:
 
 - real-world applications are rarely a single component
   - often MPMD
-  - usually combination of libraries (e.g. molecular dynamics and quantum mechanics)
+  - often combination of libraries (e.g. molecular dynamics and quantum mechanics)
 - adds several new complexities compared to single-component software
   - collective communication via `MPI_COMM_WORLD`?
   - how to identify sub-programs and communicate between and within them?

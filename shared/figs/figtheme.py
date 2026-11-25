@@ -12,6 +12,8 @@ and the PDF (figs/out/light/). A generator therefore looks like
             chart(t.out("s49_latency.svg"), ...)
 
 and reads its colours off `t` instead of from module-level constants.
+Charts that are shown in turn (variants of one chart) are written with
+save_aligned() rather than savefig(), so they line up on the slides.
 
 build_figs.py puts shared/figs on PYTHONPATH, so the plain import above works
 from any deck's figs/scripts/ directory.
@@ -65,6 +67,38 @@ class Theme(object):
         })
         plt.rcParams.update(extra)
         return self
+
+
+def save_aligned(charts, pad=0.1):
+    """Save several charts so that they line up when shown in turn -- the
+    matplotlib twin of \\figframe in shared/figs/preamble.tex.
+
+    `charts` is a list of (figure, path); all figures must have the same
+    figsize. tight_layout and bbox_inches="tight" would fit every chart to its
+    own labels, so the axes would sit at a slightly different place in each
+    and the image size would differ too. Instead, all charts get the margins
+    of the most demanding one (same axes rectangle) and are cropped to the
+    union of their extents (same image size)."""
+    from matplotlib.transforms import Bbox
+
+    figs = [fig for fig, _ in charts]
+    sizes = {tuple(fig.get_size_inches()) for fig in figs}
+    assert len(sizes) == 1, "save_aligned needs equal figsizes, got %s" % sizes
+    for fig in figs:
+        fig.tight_layout()
+    margins = dict(left=max(f.subplotpars.left for f in figs),
+                   bottom=max(f.subplotpars.bottom for f in figs),
+                   right=min(f.subplotpars.right for f in figs),
+                   top=min(f.subplotpars.top for f in figs))
+    for fig in figs:
+        fig.subplots_adjust(**margins)
+    box = Bbox.union([fig.get_tightbbox(fig.canvas.get_renderer())
+                      for fig in figs]).padded(pad)
+    for fig, path in charts:
+        fig.savefig(path, format="svg", transparent=True, bbox_inches=box)
+        plt.close(fig)
+        print("wrote", os.path.join(os.path.basename(os.path.dirname(path)),
+                                    os.path.basename(path)))
 
 
 def themes(out_root):

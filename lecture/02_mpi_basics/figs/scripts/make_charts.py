@@ -14,7 +14,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 
-from figtheme import themes  # shared/figs, put on PYTHONPATH by build_figs.py
+from figtheme import save_aligned, themes  # shared/figs, put on PYTHONPATH by build_figs.py
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.normpath(os.path.join(HERE, "..", "data", "osu_latency.csv"))
@@ -42,7 +42,7 @@ def style(ax, t):
 FIGSIZE = (7.6, 3.65)
 
 
-def chart_latency(t, cats, cols, path):
+def chart_latency(t, cats, cols):
     """Slide 49: latency only."""
     fig, ax = plt.subplots(figsize=FIGSIZE)
     ax.plot(cats, cols["latency intra socket"], "-o", color=t.blu,
@@ -54,13 +54,10 @@ def chart_latency(t, cats, cols, path):
     ax.set_ylim(0, 4000)
     style(ax, t)
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=2)
-    fig.tight_layout()
-    fig.savefig(path, format="svg", transparent=True, bbox_inches="tight")
-    plt.close(fig)
-    print("wrote", path)
+    return fig
 
 
-def chart_latency_l3(t, cats, cols, path):
+def chart_latency_l3(t, cats, cols):
     """Slide 50: latency plus L3 cache misses on a secondary axis."""
     fig, ax = plt.subplots(figsize=FIGSIZE)
     ax.plot(cats, cols["latency intra socket"], "-o", color=t.blu,
@@ -91,18 +88,17 @@ def chart_latency_l3(t, cats, cols, path):
     ax.legend(handles, labels, loc="upper center",
               bbox_to_anchor=(0.5, -0.22), ncol=2)
 
-    fig.tight_layout()
-    fig.savefig(path, format="svg", transparent=True, bbox_inches="tight")
-    plt.close(fig)
-    print("wrote", path)
+    return fig
 
 
 def main():
     cats, cols = load()
     for t in themes(OUT):
         t.apply()
-        chart_latency(t, cats, cols, t.out("s49_latency.svg"))
-        chart_latency_l3(t, cats, cols, t.out("s50_latency_l3.svg"))
+        # the two are shown on consecutive slides: same axes, same size
+        save_aligned([
+            (chart_latency(t, cats, cols), t.out("s49_latency.svg")),
+            (chart_latency_l3(t, cats, cols), t.out("s50_latency_l3.svg"))])
 
 
 if __name__ == "__main__":

@@ -64,3 +64,11 @@
     \draw[rmasync] (0,-0.38) -- (0.85,-0.38);
     \node[rmacall,anchor=west] at (1.00,-0.38) {synchronization};
   \end{scope}}
+
+% \rmaframe -- common frame (see \figframe in shared/figs/preamble.tex),
+% so the figures that end with it come out the same size and line up when
+% the slides change: slides 21, 22 and 23 show the same panel in turn.
+% (Slide 19 is laid out differently and stays cropped to its content.)
+% Re-derive it with  python tools/build_figs.py --measure <figures>
+% if one of them grows.
+\newcommand{\rmaframe}{\figframe{-3.02}{-6.52}{6.28}{0.61}}
